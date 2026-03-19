@@ -11,11 +11,11 @@ app.use(bodyParser.json());
 
 // Database connection
 const db = mysql.createConnection({
-  host: "containers-us-west-xxx.railway.app",
+  host: "autorack.proxy.rlwy.net",
   user: "root",
   password: "xUqDvjyIOmPpREjZCRsrRIWriWPDYihD",
   database: "railway",
-  port: 3306
+  port: 50754
 });
 
 db.connect(err => {
