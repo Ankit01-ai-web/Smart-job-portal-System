@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 // Database connection
 const db = mysql.createConnection({
-  host: "mysql-7k-5.railway.internal",
+  host: "containers-us-west-xxx.railway.app",
   user: "root",
   password: "xUqDvjyIOmPpREjZCRsrRIWriWPDYihD",
   database: "railway",
