@@ -11,10 +11,10 @@ app.use(bodyParser.json());
 
 // Database connection
 const db = mysql.createConnection({
-  host: "your-host",
-  user: "your-user",
-  password: "your-password",
-  database: "your-database",
+  host: "mysql-7k-5.railway.internal",
+  user: "root",
+  password: "xUqDvjyIOmPpREjZCRsrRIWriWPDYihD",
+  database: "railway",
   port: 3306
 });
 
