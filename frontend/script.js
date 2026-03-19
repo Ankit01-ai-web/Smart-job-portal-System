@@ -22,7 +22,7 @@ async function login() {
     password: document.getElementById("loginPassword").value
   };
 
-  const res = await fetch("http://localhost:5000/login", {
+  const res = await fetch("https://smart-job-portal-system-eftt.onrender.com", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
