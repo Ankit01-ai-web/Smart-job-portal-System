@@ -22,7 +22,7 @@ async function login() {
     password: document.getElementById("loginPassword").value
   };
 
-  const res = await fetch("https://smart-job-portal-system-eftt.onrender.com", {
+  const res = await fetch("https://smart-job-portal-system-eftt.onrender.com/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
@@ -40,7 +40,7 @@ async function login() {
 async function getProfile() {
   const token = localStorage.getItem("token");
 
-  const res = await fetch("https://smart-job-portal-system-etft.onrender.com", {
+  const res = await fetch("https://smart-job-portal-system-etft.onrender.com/profile", {
     method: "GET",
     headers: {
       "authorization": "Bearer " + token
