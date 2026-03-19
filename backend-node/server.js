@@ -10,7 +10,16 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
-app.options("*", cors());
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  next();
+});
+app.options("*", (req, res) => {
+  res.sendStatus(200);
+});
 app.use(bodyParser.json());
 
 
