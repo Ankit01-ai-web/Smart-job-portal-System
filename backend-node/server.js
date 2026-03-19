@@ -5,21 +5,14 @@ const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 
 const app = express();
+
 app.use(cors({
-  origin: "*",
+  origin: "https://unique-trifle-46a77e.netlify.app", 
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  next();
-});
-app.options("*", (req, res) => {
-  res.sendStatus(200);
-});
+app.options("*", cors()); 
 app.use(bodyParser.json());
 
 
