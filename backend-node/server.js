@@ -11,10 +11,11 @@ app.use(bodyParser.json());
 
 // Database connection
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "job_portal"
+  host: "your-host",
+  user: "your-user",
+  password: "your-password",
+  database: "your-database",
+  port: 3306
 });
 
 db.connect(err => {
