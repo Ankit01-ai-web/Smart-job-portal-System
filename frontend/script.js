@@ -40,7 +40,7 @@ async function login() {
 async function getProfile() {
   const token = localStorage.getItem("token");
 
-  const res = await fetch("http://localhost:5000/profile", {
+  const res = await fetch("https://smart-job-portal-system-etft.onrender.com", {
     method: "GET",
     headers: {
       "authorization": "Bearer " + token
