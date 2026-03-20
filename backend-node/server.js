@@ -1,26 +1,20 @@
 const cors = require("cors");
 const express = require("express");
 const mysql = require("mysql2");
-const bodyParser = require("body-parser");
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const app = express();
-
-app.use(cors({
-  origin: "https://unique-trifle-46a77e.netlify.app", 
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
-app.use(bodyParser.json());
+app.use(cors());
+app.use(express.json());
 
 
 // Database connection
 const db = mysql.createConnection({
-  host: "autorack.proxy.rlwy.net",
+  host: "localhost",
   user: "root",
-  password: "xUqDvjyIOmPpREjZCRsrRIWriWPDYihD",
-  database: "railway",
-  port: 50754
+  password: "",
+  database: "job_portal" 
 });
 
 db.connect(err => {
@@ -34,7 +28,7 @@ app.post("/register", async (req, res) => {
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  const sql = "INSERT INTO user (name, email, password, role) VALUES (?, ?, ?, ?)";
+  const sql = "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)";
 
   db.query(sql, [name, email, hashedPassword, role], (err, result) => {
     if (err) return res.send(err);
@@ -47,7 +41,6 @@ app.listen(5000, () => {
   console.log("Server running on port 5000");
 });
 
-const jwt = require("jsonwebtoken");
 
 const SECRET_KEY = "mysecretkey";
 
@@ -130,8 +123,36 @@ app.get("/jobs", (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 
 app.listen(PORT, () => {
-  console.log("Server running");
+  console.log("Server running on port " + PORT);
+});
+
+//job apply code
+app.post("/apply-job", (req, res) => {
+  const { user_id, job_id } = req.body;
+
+  const sql = "INSERT INTO applications (user_id, job_id) VALUES (?, ?)";
+
+  db.query(sql, [user_id, job_id], (err, result) => {
+    if (err) return res.send(err);
+    res.send("Applied Successfully");
+  });
+});
+
+app.get("/my-applications", (req, res) => {
+  const user_id = 1; 
+
+  const sql = `
+    SELECT jobs.title, jobs.company 
+    FROM applications
+    JOIN jobs ON applications.job_id = jobs.id
+    WHERE applications.user_id = ?
+  `;
+
+  db.query(sql, [user_id], (err, result) => {
+    if (err) return res.send(err);
+    res.json(result);
+  });
 });

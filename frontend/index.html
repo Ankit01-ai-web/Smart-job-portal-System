@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Job Portal</title>
+  <title>Smart Job Portal</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
+
+<div class="header">
+  <h1>Smart Job Portal</h1>
+</div>
+
+<!--Register section-->
+<div class="card">
   <h2>Register</h2>
 
   <input type="text" id="name" placeholder="Name">
@@ -15,13 +21,44 @@
 
   <button onclick="register()">Register</button>
 
+  <hr>
+
+  <!--log in section-->
   <h2>Login</h2>
 
   <input type="email" id="loginEmail" placeholder="Email">
   <input type="password" id="loginPassword" placeholder="Password">
 
-  <button onclick="login()">Login</button>
-  <button onclick="getProfile()">Get Profile</button>
+  <div class="btn-group">
+    <button onclick="login()">Login</button>
+    <button onclick="getProfile()">Profile</button>
+  </div>
+</div>
+
+<!--availabe job section-->
+<div class="card">
+  <h2>Available Jobs</h2>
+  <button onclick="loadJobs()">Load Jobs</button>
+
+  <div id="jobs"></div>
+</div>
+
+<!--applications status-->
+<div class="card">
+  <h2>My Applications</h2>
+  <button onclick="myApplications()">View Applications</button>
+
+  <div id="myJobs"></div>
+</div>
+
+<!--add jobs-->
+<div class="card">
+  <h2>Add Job</h2>
+
+  <input type="text" id="jobTitle" placeholder="Job Title">
+  <input type="text" id="company" placeholder="Company">
+
+  <button onclick="addJob()">Add Job</button>
 </div>
 
 <script src="script.js"></script>
